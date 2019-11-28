@@ -4,9 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2></h2>
+    <div class="calculator">
+      <div class="display">
+        <div class="history"></div>
+        <div class="result">0</div>
+      </div>
+      <div class="buttons">
+        <button type="button" data-type="clear" class="button">AC</button>
+        <button type="button" data-type="del" class="button">⌫</button>
+        <button type="button" data-type="operator" value="&#247;" class="button">&#247;</button>
+        <button type="button" data-type="operator" value="&times;" class="button">&times;</button>
+        <button type="button" value="7" class="button">7</button>
+        <button type="button" value="8" class="button">8</button>
+        <button type="button" value="9" class="button">9</button>
+        <button type="button" data-type="operator" value="+" class="button">+</button>
+        <button type="button" value="4" class="button">4</button>
+        <button type="button" value="5" class="button">5</button>
+        <button type="button" value="6" class="button">6</button>
+        <button type="button" data-type="operator" value="&minus;" class="button">&minus;</button>
+        <button type="button" value="1" class="button">1</button>
+        <button type="button" value="2" class="button">2</button>
+        <button type="button" value="3" class="button">3</button>
+        <button type="button" data-type="operator" value="=" class="button equality">=</button>
+        <button type="button" value="0" class="button zero">0</button>
+        <button type="button" data-type="decimal" value="." class="button">.</button>
+        <button type="button" data-type="plusmin" value="&plusmn;" class="button">&plusmn;</button>
+      </div>
+    </div>
+    <script src="index.js"></script>
   </body>
 </html>
