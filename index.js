@@ -30,11 +30,14 @@ function calculate(firstOperand, secondOperand, operator) {
 function inputDigit(digit) {
   const { displayValue, waitingForSecondOperand } = calculator;
 
-
   if (waitingForSecondOperand === true) {
     calculator.displayValue = digit;
     calculator.waitingForSecondOperand = false;
   } else if (displayValue.length < 16) {
+    if (displayValue === 'Error') {
+      calculator.displayValue = digit;
+      return;
+    }
     calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
   }
 }
@@ -65,6 +68,14 @@ function handleOperator(nextOperator) {
   }
   if (operator) {
     const result = parseFloat(calculate(firstOperand, inputValue, operator).toFixed(5));
+
+    if (!Number.isFinite(result)) {
+      calculator.history = '';
+      calculator.displayValue = 'Error';
+      calculator.firstOperand = null;
+      calculator.waitingForSecondOperand = false;
+      return;
+    }
 
     calculator.displayValue = String(result);
     calculator.firstOperand = result;
