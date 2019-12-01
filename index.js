@@ -30,10 +30,11 @@ function calculate(firstOperand, secondOperand, operator) {
 function inputDigit(digit) {
   const { displayValue, waitingForSecondOperand } = calculator;
 
+
   if (waitingForSecondOperand === true) {
     calculator.displayValue = digit;
     calculator.waitingForSecondOperand = false;
-  } else {
+  } else if (displayValue.length < 16) {
     calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
   }
 }
