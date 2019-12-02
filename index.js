@@ -171,3 +171,63 @@ buttons.addEventListener('mousedown', (event) => {
 window.onmouseup = () => {
   Array.from(buttons.children).map((button) => button.classList.remove('active'));
 };
+
+
+function handleKeyboardInput(event) {
+  const { code, key } = event;
+  if (code === 'NumpadEnter' || code === 'Enter' || code === 'Equal') {
+    handleOperator('=');
+    updateResult();
+    updateHistory();
+    return;
+  }
+  if (code === 'Escape') {
+    resetCalculator();
+    updateResult();
+    updateHistory();
+    return;
+  }
+
+  if (code === 'NumpadAdd' || key === '+') {
+    handleOperator('+');
+    updateResult();
+    updateHistory();
+    return;
+  }
+  if (code === 'NumpadSubtract' || key === '-') {
+    handleOperator('−');
+    updateResult();
+    updateHistory();
+    return;
+  }
+  if (code === 'NumpadMultiply' || key === '*') {
+    handleOperator('×');
+    updateResult();
+    updateHistory();
+    return;
+  }
+  if (code === 'NumpadDivide' || key === '/') {
+    handleOperator('÷');
+    updateResult();
+    updateHistory();
+    return;
+  }
+
+  if (code === 'Backspace') {
+    deleteLastdigit();
+    updateResult();
+    return;
+  }
+
+  if (code === 'NumpadDecimal' || key === '.' || key === ',') {
+    inputDecimal('.');
+    updateResult();
+    return;
+  }
+  if (Number.isInteger(+key)) {
+    inputDigit(key);
+    updateResult();
+  }
+}
+
+document.addEventListener('keydown', handleKeyboardInput);
