@@ -131,7 +131,7 @@ function deleteLastdigit() {
 const buttons = document.querySelector('.buttons');
 buttons.addEventListener('mousedown', (event) => {
   const { target } = event;
-
+  target.classList.add('active');
   switch (target.dataset.type) {
     case 'operator': {
       handleOperator(target.value);
@@ -168,20 +168,20 @@ buttons.addEventListener('mousedown', (event) => {
 });
 
 
-window.onmouseup = () => {
-  Array.from(buttons.children).map((button) => button.classList.remove('active'));
-};
-
-
 function handleKeyboardInput(event) {
   const { code, key } = event;
-  if (code === 'NumpadEnter' || code === 'Enter' || code === 'Equal') {
+
+  if (key === 'Enter' || code === 'Equal') {
+    const elem = document.querySelector('button[value = "="]');
+    elem.classList.add('active');
     handleOperator('=');
     updateResult();
     updateHistory();
     return;
   }
   if (code === 'Escape') {
+    const elem = document.querySelector('button[data-type ="clear"]');
+    elem.classList.add('active');
     resetCalculator();
     updateResult();
     updateHistory();
@@ -189,24 +189,32 @@ function handleKeyboardInput(event) {
   }
 
   if (code === 'NumpadAdd' || key === '+') {
+    const elem = document.querySelector('button[value = "+"]');
+    elem.classList.add('active');
     handleOperator('+');
     updateResult();
     updateHistory();
     return;
   }
-  if (code === 'NumpadSubtract' || key === '-') {
+  if (code === 'NumpadSubtract' || key === '−') {
+    const elem = document.querySelector('button[value = "−"]');
+    elem.classList.add('active');
     handleOperator('−');
     updateResult();
     updateHistory();
     return;
   }
   if (code === 'NumpadMultiply' || key === '*') {
+    const elem = document.querySelector('button[value = "×"]');
+    elem.classList.add('active');
     handleOperator('×');
     updateResult();
     updateHistory();
     return;
   }
   if (code === 'NumpadDivide' || key === '/') {
+    const elem = document.querySelector('button[value = "÷"]');
+    elem.classList.add('active');
     handleOperator('÷');
     updateResult();
     updateHistory();
@@ -214,20 +222,34 @@ function handleKeyboardInput(event) {
   }
 
   if (code === 'Backspace') {
+    const elem = document.querySelector('button[data-type="del"]');
+    elem.classList.add('active');
     deleteLastdigit();
     updateResult();
     return;
   }
 
   if (code === 'NumpadDecimal' || key === '.' || key === ',') {
+    const elem = document.querySelector('button[value = "."]');
+    elem.classList.add('active');
     inputDecimal('.');
     updateResult();
     return;
   }
   if (Number.isInteger(+key)) {
+    const elem = document.querySelector(`button[value = "${key}"]`);
+    elem.classList.add('active');
     inputDigit(key);
     updateResult();
   }
 }
 
+
 document.addEventListener('keydown', handleKeyboardInput);
+window.onmouseup = () => {
+  Array.from(buttons.children).map((button) => button.classList.remove('active'));
+};
+
+window.onkeyup = () => {
+  Array.from(buttons.children).map((button) => button.classList.remove('active'));
+};
